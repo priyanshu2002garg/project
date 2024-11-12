@@ -1,50 +1,34 @@
-name: Deploy Serverless API
-
+ name: Deploy Serverless API
 
 on:
-
-push:
-
-branches:
-
-- main
-
+  push:
+    branches:
+      - main  # Trigger the workflow on push to the 'main' branch
 
 jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Use the latest version of Ubuntu for the runner
 
-deploy:
+    steps:
+    # Step 1: Checkout the repository code
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      # This action checks out your repository to the GitHub runner so the following steps can access the code.
 
-runs-on: ubuntu-latest
+    # Step 2: Set up AWS credentials for authentication with AWS
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}  # Get the AWS Access Key ID from GitHub Secrets
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # Get the AWS Secret Access Key from GitHub Secrets
+        aws-region: us-east-1  # Replace with your AWS region (e.g., us-west-2, eu-central-1, etc.)
 
-
-steps:
-
-- name: Checkout repository
-
-uses: actions/checkout@v2
-
-
-- name: Configure AWS credentials
-
-uses: aws-actions/configure-aws-credentials@v1
-
-with:
-
-aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-
-aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
-aws-region: us-east-1
-
-
-- name: Deploy CloudFormation Stack
-
-run: |
-
-aws cloudformation deploy \
-
---template-file template.yml \
-
---stack-name ServerlessAPIStack \
-
---capabilities CAPABILITY_NAMED_IAM
+    # Step 3: Deploy CloudFormation Stack using AWS CLI
+    - name: Deploy CloudFormation Stack
+      run: |
+        aws cloudformation deploy \
+          --template-file template.yml \
+          --stack-name ServerlessAPIStack \
+          --capabilities CAPABILITY_NAMED_IAM
+      # This command deploys the CloudFormation stack using the `template.yml` file.
+      # The `--capabilities CAPABILITY_NAMED_IAM` flag is required because the template creates IAM resources (roles).
