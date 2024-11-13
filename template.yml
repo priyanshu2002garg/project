@@ -33,7 +33,7 @@ Resources:
           def handler(event, context):
               return {
                   'statusCode': 200,
-                  'body': 'Hello from Lambda!'
+                  'body': 'Hello from Priyanshu!'
               }
       Runtime: python3.8
       MemorySize: 128
