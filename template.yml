@@ -33,7 +33,44 @@ Resources:
           def handler(event, context):
               return {
                   'statusCode': 200,
-                  'body': 'Hello from Priyanshu!'
+                  'body': <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple HTML Page with Inline CSS</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f0f0f0; margin: 0; padding: 0;">
+
+    <!-- Header Section -->
+    <header style="background-color: #4CAF50; color: white; text-align: center; padding: 10px 0;">
+        <h1>Welcome to My Simple Page</h1>
+        <p style="font-size: 16px;">This page demonstrates inline CSS.</p>
+    </header>
+
+    <!-- Main Content Section -->
+    <main style="padding: 20px;">
+        <h2 style="color: #333; font-size: 24px;">About Inline CSS</h2>
+        <p style="color: #555; line-height: 1.6;">
+            Inline CSS is a way to apply styles directly to individual HTML elements using the `style` attribute.
+            While it's generally better to use external or internal CSS for larger projects, inline CSS can be useful
+            for quick testing or when you need to style a single element.
+        </p>
+        
+        <!-- Button -->
+        <button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer;">
+            Click Me!
+        </button>
+    </main>
+
+    <!-- Footer Section -->
+    <footer style="background-color: #333; color: white; text-align: center; padding: 10px 0;">
+        <p style="font-size: 14px;">&copy; 2024 Simple HTML Page. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
+
               }
       Runtime: python3.8
       MemorySize: 128
